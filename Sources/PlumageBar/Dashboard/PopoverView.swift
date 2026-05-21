@@ -3,6 +3,8 @@ import SwiftUI
 
 struct PopoverView: View {
     @Bindable var viewModel: DashboardViewModel
+    @Bindable var settingsStore: SettingsStore
+    var onOpenSettings: () -> Void
 
     private static let memoryFormatter: ByteCountFormatter = {
         let formatter = ByteCountFormatter()
@@ -13,29 +15,43 @@ struct PopoverView: View {
     }()
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(alignment: .trailing, spacing: 8) {
+            settingsButton
+
             MetricCard(
-                title: "CPU",
+                title: "metric.cpu",
                 systemImage: "cpu",
                 valueText: percent(viewModel.latest?.cpu.totalPercent),
-                series: viewModel.history.cpuTotalSeries()
+                series: viewModel.history.cpuTotalSeries(),
+                valueColor: state(
+                    value: viewModel.latest?.cpu.totalPercent,
+                    threshold: settingsStore.settings.thresholds.cpuPercent
+                ).color
             )
 
             if viewModel.latest?.gpu != nil {
                 MetricCard(
-                    title: "GPU",
+                    title: "metric.gpu",
                     systemImage: "display",
                     valueText: percent(viewModel.latest?.gpu?.utilizationPercent),
-                    series: viewModel.history.gpuSeries()
+                    series: viewModel.history.gpuSeries(),
+                    valueColor: state(
+                        value: viewModel.latest?.gpu?.utilizationPercent,
+                        threshold: settingsStore.settings.thresholds.gpuPercent
+                    ).color
                 )
             }
 
             MetricCard(
-                title: "Memory",
+                title: "metric.ram",
                 systemImage: "memorychip",
                 valueText: percent(viewModel.latest?.ram.usedPercent),
                 subtitle: ramAbsolute(viewModel.latest?.ram),
-                series: viewModel.history.ramUsedSeries()
+                series: viewModel.history.ramUsedSeries(),
+                valueColor: state(
+                    value: viewModel.latest?.ram.usedPercent,
+                    threshold: settingsStore.settings.thresholds.ramPercent
+                ).color
             )
 
             ProcessListView(report: viewModel.latest?.processes)
@@ -44,6 +60,24 @@ struct PopoverView: View {
         .frame(width: Theme.popoverWidth)
         .fixedSize(horizontal: false, vertical: true)
         .background(Color.clear)
+    }
+
+    private var settingsButton: some View {
+        Button(action: onOpenSettings) {
+            Image(systemName: "gearshape")
+                .font(.system(size: 13, weight: .medium))
+                .symbolRenderingMode(.hierarchical)
+                .padding(6)
+        }
+        .buttonStyle(.plain)
+        .background(
+            Circle().fill(.thinMaterial)
+        )
+        .overlay(
+            Circle().stroke(Color.primary.opacity(0.12), lineWidth: 0.5)
+        )
+        .accessibilityLabel(Text("menu.settings"))
+        .help(Text("menu.settings"))
     }
 
     private func percent(_ value: Double?) -> String {
@@ -57,12 +91,20 @@ struct PopoverView: View {
         let total = Self.memoryFormatter.string(fromByteCount: Int64(clamping: ram.totalBytes))
         return "\(used) / \(total)"
     }
+
+    private func state(value: Double?, threshold: Double) -> ThresholdState {
+        ThresholdState(value: value, threshold: threshold)
+    }
 }
 
 #Preview("PopoverView with synthetic data") {
     let vm = DashboardViewModel()
+    let store = SettingsStore(
+        defaults: UserDefaults(suiteName: "preview-\(UUID().uuidString)") ?? .standard,
+        key: "AppSettings.v1"
+    )
     let cpu = CPUUsage(
-        userPercent: 8, systemPercent: 4, idlePercent: 88, totalPercent: 12,
+        userPercent: 8, systemPercent: 4, idlePercent: 12, totalPercent: 88,
         perCoreTotalPercent: []
     )
     let ram = RAMUsage(
@@ -71,7 +113,7 @@ struct PopoverView: View {
         freeBytes: 6_100_000_000,
         usedPercent: 62
     )
-    let gpu = GPUUsage(utilizationPercent: 35)
+    let gpu = GPUUsage(utilizationPercent: 92)
     let processes = ProcessReport(
         topByCPU: [
             .init(pid: 1, name: "Xcode", cpuPercent: 85, residentBytes: 3_500_000_000),
@@ -88,12 +130,9 @@ struct PopoverView: View {
         vm.history.append(
             Snapshot(
                 timestamp: Date().addingTimeInterval(Double(i)),
-                cpu: cpu,
-                ram: ram,
-                gpu: gpu,
-                processes: processes
+                cpu: cpu, ram: ram, gpu: gpu, processes: processes
             )
         )
     }
-    return PopoverView(viewModel: vm)
+    return PopoverView(viewModel: vm, settingsStore: store, onOpenSettings: {})
 }

@@ -5,7 +5,7 @@ public actor LiveMetricsProvider: MetricsProvider {
     public nonisolated let snapshots: AsyncStream<Snapshot>
     private nonisolated let continuation: AsyncStream<Snapshot>.Continuation
 
-    private let interval: Duration
+    private var interval: Duration
     // Process scanning is the most expensive part of a tick (proc_listallpids +
     // proc_pidinfo per PID). Run it every Nth tick to keep the steady-state CPU
     // budget low; 2 → twice the sample interval is responsive enough for a
@@ -43,7 +43,6 @@ public actor LiveMetricsProvider: MetricsProvider {
 
     public func start() {
         guard samplingTask == nil else { return }
-        let interval = self.interval
         samplingTask = Task { [weak self] in
             // SuspendingClock pauses while the Mac sleeps, so wake-from-sleep
             // does not produce a burst of "missed" ticks. The fixed-cadence
@@ -51,8 +50,9 @@ public actor LiveMetricsProvider: MetricsProvider {
             var next = SuspendingClock.now
             while !Task.isCancelled {
                 guard let self else { return }
+                let currentInterval = await self.interval
                 await self.tick()
-                next = next.advanced(by: interval)
+                next = next.advanced(by: currentInterval)
                 do {
                     try await Task.sleep(until: next, clock: .suspending)
                 } catch {
@@ -66,6 +66,13 @@ public actor LiveMetricsProvider: MetricsProvider {
         samplingTask?.cancel()
         samplingTask = nil
         continuation.finish()
+    }
+
+    /// Updates the sample cadence. Takes effect on the next tick (the current
+    /// in-flight sleep finishes against the previous interval, then the new
+    /// value is read).
+    public func setInterval(_ newInterval: Duration) {
+        self.interval = newInterval
     }
 
     private func tick() {

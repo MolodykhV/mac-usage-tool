@@ -71,23 +71,57 @@ final class PopoverPanelController<Root: View>: NSObject {
         // Anchor under the button, centred horizontally. Keep at least an 8pt
         // margin from screen edges so the shadow doesn't get cut off.
         let panelSize = panel.frame.size
-        var origin = NSPoint(
+        var finalOrigin = NSPoint(
             x: buttonRectInScreen.midX - panelSize.width / 2,
             y: buttonRectInScreen.minY - panelSize.height - 6
         )
         if let screen = button.window?.screen ?? NSScreen.main {
             let visible = screen.visibleFrame
-            origin.x = max(visible.minX + 8, min(origin.x, visible.maxX - panelSize.width - 8))
-            origin.y = max(visible.minY + 8, origin.y)
+            let clampedX = max(
+                visible.minX + 8, min(finalOrigin.x, visible.maxX - panelSize.width - 8))
+            let clampedY = max(visible.minY + 8, finalOrigin.y)
+            finalOrigin = NSPoint(x: clampedX, y: clampedY)
         }
-        panel.setFrameOrigin(origin)
+
+        // Slide in from slightly above the final position with a quick fade.
+        // 10pt of travel + 0.18s easeOut feels like a Control-Center reveal
+        // without being slow enough to feel laggy.
+        let startOrigin = NSPoint(x: finalOrigin.x, y: finalOrigin.y + 10)
+        panel.setFrameOrigin(startOrigin)
+        panel.alphaValue = 0
         panel.orderFrontRegardless()
+
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.18
+            context.timingFunction = CAMediaTimingFunction(name: .easeOut)
+            context.allowsImplicitAnimation = true
+            panel.animator().setFrameOrigin(finalOrigin)
+            panel.animator().alphaValue = 1
+        }
         installOutsideDismissMonitors()
     }
 
     func close() {
         removeMonitors()
-        panel.orderOut(nil)
+        let panel = self.panel
+        NSAnimationContext.runAnimationGroup(
+            { context in
+                context.duration = 0.12
+                context.timingFunction = CAMediaTimingFunction(name: .easeIn)
+                panel.animator().alphaValue = 0
+            },
+            completionHandler: {
+                // AppKit's completion is delivered on the main thread, but
+                // strict concurrency doesn't know that. Re-dispatch onto
+                // MainActor via the main dispatch queue so we don't lie to
+                // the compiler — and so we don't crash if a future SDK starts
+                // delivering completion off-main.
+                DispatchQueue.main.async {
+                    panel.orderOut(nil)
+                    panel.alphaValue = 1
+                }
+            }
+        )
     }
 
     func toggle(relativeTo button: NSStatusBarButton) {
