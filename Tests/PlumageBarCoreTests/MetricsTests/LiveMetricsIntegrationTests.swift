@@ -1,3 +1,5 @@
+import CIOReport
+import CoreFoundation
 import Foundation
 import Testing
 
@@ -5,6 +7,16 @@ import Testing
 
 extension Tag {
     @Tag static var integration: Self
+}
+
+private func hasGPUStatsChannels() -> Bool {
+    // GitHub Actions macOS runners are virtualized and expose no GPU residency
+    // channels. Skip GPU integration tests when the channel group is empty.
+    guard let channels = IOReportCopyChannelsInGroup("GPU Stats" as CFString, nil, 0, 0, 0)
+    else {
+        return false
+    }
+    return CFDictionaryGetCount(channels) > 0
 }
 
 @Suite("Live metric readers (hardware integration)", .tags(.integration))
@@ -44,7 +56,10 @@ struct LiveMetricsIntegrationTests {
         #expect(usage.usedPercent <= 100)
     }
 
-    @Test("GPUReader subscribes and produces a delta on second read")
+    @Test(
+        "GPUReader subscribes and produces a delta on second read",
+        .enabled(if: hasGPUStatsChannels(), "no GPU Stats channels — likely a CI virtual machine")
+    )
     func liveGPURead() throws {
         let reader = GPUReader()
         _ = try reader.read()
