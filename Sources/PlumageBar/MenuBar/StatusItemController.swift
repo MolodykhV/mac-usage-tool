@@ -16,6 +16,11 @@ final class StatusItemController: NSObject {
     private var panelController: PopoverPanelController<PopoverView>?
     private var rightClickMenu: NSMenu?
     private var appearanceObservation: NSKeyValueObservation?
+    /// Captures every input that affects the rasterised icon. Compared via
+    /// Equatable on each call to short-circuit the ImageRenderer hot path
+    /// when integer-rounded values, threshold states, or visible metrics
+    /// haven't actually changed since the previous tick.
+    private var lastRenderState: MenuBarIconRenderState?
     private static let iconHeight: CGFloat = 22
 
     init(
@@ -89,6 +94,10 @@ final class StatusItemController: NSObject {
         statusItem = nil
         panelController = nil
         rightClickMenu = nil
+        // If install() is ever re-invoked on the same instance, the cached
+        // state must not short-circuit the first render against a fresh
+        // status item that has no image set yet.
+        lastRenderState = nil
     }
 
     /// Render the SwiftUI menu-bar view into an `NSImage` and assign it to the
@@ -104,17 +113,20 @@ final class StatusItemController: NSObject {
         let menuBarSettings = settingsStore.settings.menuBar
         let thresholds = settingsStore.settings.thresholds
         let snapshot = viewModel.latest
-        let usesAccentColour = menuBarSettings.visibleMetrics.contains { metric in
-            let value = metric.value(in: snapshot)
-            let threshold: Double
-            switch metric {
-            case .cpu: threshold = thresholds.cpuPercent
-            case .gpu: threshold = thresholds.gpuPercent
-            case .ram: threshold = thresholds.ramPercent
-            }
-            return ThresholdState(value: value, threshold: threshold) != .normal
-        }
         let scheme = currentColorScheme()
+        let coreScheme: MenuBarIconRenderState.ColorScheme =
+            scheme == .dark ? .dark : .light
+
+        let state = MenuBarIconRenderState.from(
+            snapshot: snapshot,
+            menuBar: menuBarSettings,
+            thresholds: thresholds,
+            scheme: coreScheme
+        )
+        if state == lastRenderState { return }
+        lastRenderState = state
+
+        let usesAccentColour = state.slots.contains { $0.state != .normal }
         let view = MenuBarIconView(
             snapshot: snapshot,
             metrics: menuBarSettings.visibleMetrics,
