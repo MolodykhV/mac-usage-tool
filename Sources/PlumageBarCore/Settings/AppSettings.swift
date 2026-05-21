@@ -4,18 +4,39 @@ public struct AppSettings: Codable, Sendable, Equatable {
     public var menuBar: MenuBarSettings
     public var sampling: SamplingSettings
     public var thresholds: ThresholdSettings
+    public var notifications: NotificationSettings
     public var autostart: Bool
 
     public init(
         menuBar: MenuBarSettings = .default,
         sampling: SamplingSettings = .default,
         thresholds: ThresholdSettings = .default,
+        notifications: NotificationSettings = .default,
         autostart: Bool = false
     ) {
         self.menuBar = menuBar
         self.sampling = sampling
         self.thresholds = thresholds
+        self.notifications = notifications
         self.autostart = autostart
+    }
+
+    // Tolerate older blobs that don't have a `notifications` key — pre-Stage 5
+    // settings simply default to "all on".
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            menuBar: try container.decode(MenuBarSettings.self, forKey: .menuBar),
+            sampling: try container.decode(SamplingSettings.self, forKey: .sampling),
+            thresholds: try container.decode(ThresholdSettings.self, forKey: .thresholds),
+            notifications: try container.decodeIfPresent(
+                NotificationSettings.self, forKey: .notifications) ?? .default,
+            autostart: try container.decodeIfPresent(Bool.self, forKey: .autostart) ?? false
+        )
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case menuBar, sampling, thresholds, notifications, autostart
     }
 
     public static let `default` = AppSettings()
@@ -54,7 +75,7 @@ public struct SamplingSettings: Codable, Sendable, Equatable {
     // Decoded values are re-routed through the clamping initializer so a
     // tampered or future-format JSON blob can't drive the sampler into a
     // multi-hour sleep.
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let raw = try container.decode(Double.self, forKey: .intervalSeconds)
         self.init(intervalSeconds: raw)
@@ -94,7 +115,7 @@ public struct ThresholdSettings: Codable, Sendable, Equatable {
     // Funnels decoded values back through the clamping initializer so an
     // out-of-range JSON blob can't bypass the validation the manual init
     // performs.
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             cpuPercent: try container.decode(Double.self, forKey: .cpuPercent),
