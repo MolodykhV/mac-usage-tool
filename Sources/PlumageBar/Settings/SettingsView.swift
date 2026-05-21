@@ -4,6 +4,7 @@ import SwiftUI
 struct SettingsView: View {
     @Bindable var store: SettingsStore
     var autostartManager: AutostartManager
+    @Bindable var notificationAdapter: NotificationCenterAdapter
 
     var body: some View {
         TabView {
@@ -13,10 +14,10 @@ struct SettingsView: View {
             DisplaySettingsView(store: store)
                 .tabItem { Label("settings.tab.display", systemImage: "rectangle.dashed") }
 
-            ThresholdsSettingsView(store: store)
+            ThresholdsSettingsView(store: store, notificationAdapter: notificationAdapter)
                 .tabItem { Label("settings.tab.thresholds", systemImage: "exclamationmark.bubble") }
         }
-        .frame(width: 460, height: 320)
+        .frame(width: 460, height: 380)
         .padding(.top, 8)
     }
 }
@@ -143,9 +144,78 @@ struct DisplaySettingsView: View {
 
 struct ThresholdsSettingsView: View {
     @Bindable var store: SettingsStore
+    @Bindable var notificationAdapter: NotificationCenterAdapter
 
     var body: some View {
         Form {
+            Section {
+                HStack {
+                    Text("notifications.status.label")
+                    Spacer()
+                    Text(LocalizedStringKey(notificationAdapter.statusLocalizationKey))
+                        .foregroundStyle(notificationAdapter.isAuthorized ? .green : .secondary)
+                        .monospacedDigit()
+                }
+                HStack {
+                    if notificationAdapter.isAuthorized {
+                        Button("notifications.action.test") {
+                            notificationAdapter.sendTestNotification()
+                        }
+                    } else {
+                        Button("notifications.action.openSystemSettings") {
+                            notificationAdapter.openSystemSettings()
+                        }
+                    }
+                }
+            } header: {
+                Text("notifications.status.section")
+            } footer: {
+                if !notificationAdapter.isAuthorized {
+                    Text("notifications.status.hint")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Section {
+                Toggle(
+                    "settings.notifications.master",
+                    isOn: Binding(
+                        get: { store.settings.notifications.enabled },
+                        set: { v in store.update { $0.notifications.enabled = v } }
+                    ))
+                Toggle(
+                    "settings.notifications.cpu",
+                    isOn: Binding(
+                        get: { store.settings.notifications.cpu },
+                        set: { v in store.update { $0.notifications.cpu = v } }
+                    )
+                )
+                .disabled(!store.settings.notifications.enabled)
+                Toggle(
+                    "settings.notifications.gpu",
+                    isOn: Binding(
+                        get: { store.settings.notifications.gpu },
+                        set: { v in store.update { $0.notifications.gpu = v } }
+                    )
+                )
+                .disabled(!store.settings.notifications.enabled)
+                Toggle(
+                    "settings.notifications.ram",
+                    isOn: Binding(
+                        get: { store.settings.notifications.ram },
+                        set: { v in store.update { $0.notifications.ram = v } }
+                    )
+                )
+                .disabled(!store.settings.notifications.enabled)
+            } header: {
+                Text("settings.notifications.section")
+            } footer: {
+                Text("settings.notifications.hint")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
             Section {
                 thresholdSlider(
                     title: "settings.thresholds.cpu",

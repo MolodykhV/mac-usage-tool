@@ -386,6 +386,226 @@
         "de" : { "stringUnit" : { "state" : "translated", "value" : "Unbekannt" } },
         "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未知" } }
       }
+    },
+    "settings.notifications.section" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уведомления" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Notifications" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Notificaciones" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Mitteilungen" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "通知" } }
+      }
+    },
+    "settings.notifications.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar shows a system notification when a metric stays above its threshold for the dwell time below." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar показывает системное уведомление, когда метрика держится выше порога заданное ниже время." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar affiche une notification système quand une métrique reste au-dessus du seuil pendant la durée indiquée ci-dessous." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar muestra una notificación del sistema cuando una métrica supera el umbral durante el tiempo indicado abajo." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar zeigt eine Systembenachrichtigung, wenn ein Wert über die unten festgelegte Zeit hinaus oberhalb der Schwelle bleibt." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当某项指标在下面设定的时间内保持高于阈值时,Plumage Bar 会显示系统通知。" } }
+      }
+    },
+    "settings.notifications.master" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enable notifications" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Включить уведомления" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Activer les notifications" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Activar notificaciones" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Mitteilungen aktivieren" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "启用通知" } }
+      }
+    },
+    "settings.notifications.cpu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notify for CPU" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уведомлять о ЦП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Notifier pour le CPU" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Notificar para CPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "CPU benachrichtigen" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "CPU 通知" } }
+      }
+    },
+    "settings.notifications.gpu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notify for GPU" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уведомлять о ГП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Notifier pour le GPU" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Notificar para GPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "GPU benachrichtigen" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "GPU 通知" } }
+      }
+    },
+    "settings.notifications.ram" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notify for memory" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уведомлять о памяти" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Notifier pour la mémoire" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Notificar para memoria" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Speicher benachrichtigen" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "内存通知" } }
+      }
+    },
+    "alert.cpu.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "High CPU usage" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Высокая нагрузка на ЦП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Utilisation CPU élevée" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Uso elevado de CPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Hohe CPU-Auslastung" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "CPU 占用过高" } }
+      }
+    },
+    "alert.gpu.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "High GPU usage" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Высокая нагрузка на ГП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Utilisation GPU élevée" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Uso elevado de GPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Hohe GPU-Auslastung" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "GPU 占用过高" } }
+      }
+    },
+    "alert.ram.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "High memory usage" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Высокое потребление памяти" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Mémoire fortement utilisée" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Memoria muy utilizada" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Hohe Speicherauslastung" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "内存占用过高" } }
+      }
+    },
+    "alert.body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Currently %.0f%% — above your %.0f%% threshold." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сейчас %.0f%% — выше вашего порога %.0f%%." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Actuellement %.0f%% — au-dessus de votre seuil %.0f%%." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Actualmente %.0f%% — por encima de tu umbral %.0f%%." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Aktuell %.0f%% — über Ihrer Schwelle %.0f%%." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前 %.0f%% — 高于您设定的 %.0f%% 阈值。" } }
+      }
+    },
+    "notifications.status.section" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System permission" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Системное разрешение" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Autorisation système" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Permiso del sistema" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Systemberechtigung" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "系统授权" } }
+      }
+    },
+    "notifications.status.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Status" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Статус" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "État" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Estado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Status" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "状态" } }
+      }
+    },
+    "notifications.status.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "macOS will only show alerts when Plumage Bar is allowed in Notifications. Ad-hoc-signed builds often need a manual grant in System Settings." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "macOS показывает уведомления только если Plumage Bar разрешён в Уведомлениях. Для ad-hoc-сборок обычно требуется ручное разрешение в Системных настройках." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "macOS n’affiche les alertes que si Plumage Bar est autorisé dans Notifications. Les versions signées ad-hoc nécessitent souvent une autorisation manuelle dans Réglages Système." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "macOS sólo muestra alertas si Plumage Bar está permitido en Notificaciones. Las versiones firmadas ad-hoc suelen requerir aprobación manual en Ajustes del Sistema." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "macOS zeigt Mitteilungen nur an, wenn Plumage Bar in Mitteilungen erlaubt ist. Ad-hoc-signierte Builds müssen meist manuell in den Systemeinstellungen freigegeben werden." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "只有当 Plumage Bar 在「通知」中获得授权,macOS 才会显示提醒。临时签名的版本通常需要在「系统设置」中手动授权。" } }
+      }
+    },
+    "notifications.status.authorized" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Authorized" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Разрешено" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Autorisé" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Autorizado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erlaubt" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已授权" } }
+      }
+    },
+    "notifications.status.denied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Denied" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отклонено" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Refusé" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Denegado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Verweigert" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已拒绝" } }
+      }
+    },
+    "notifications.status.provisional" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Provisional" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Предварительно" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Provisoire" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Provisional" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Vorläufig" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂时授权" } }
+      }
+    },
+    "notifications.status.notDetermined" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not requested yet" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ещё не запрошено" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Pas encore demandé" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Aún no solicitado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Noch nicht angefordert" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "尚未请求" } }
+      }
+    },
+    "notifications.status.ephemeral" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Ephemeral" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Временное" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Temporaire" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Temporal" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Temporär" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "临时" } }
+      }
+    },
+    "notifications.action.test" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Send test notification" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отправить тестовое уведомление" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Envoyer une notification test" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Enviar notificación de prueba" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Test-Mitteilung senden" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "发送测试通知" } }
+      }
+    },
+    "notifications.action.openSystemSettings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open System Settings" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Открыть Системные настройки" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Ouvrir Réglages Système" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Abrir Ajustes del Sistema" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Systemeinstellungen öffnen" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "打开系统设置" } }
+      }
     }
   }
 }
