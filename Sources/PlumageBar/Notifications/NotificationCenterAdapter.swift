@@ -3,7 +3,13 @@ import Foundation
 import OSLog
 import Observation
 import PlumageBarCore
-import UserNotifications
+
+// macOS 26 SDK marks UNNotificationSettings as Sendable; older toolchains
+// (e.g. the GitHub Actions macos-latest runner pinned to Xcode 16.x) don't.
+// @preconcurrency downgrades the resulting Sendable-violation errors to
+// warnings, so the build succeeds on both. When the runner catches up, the
+// attribute becomes a no-op.
+@preconcurrency import UserNotifications
 
 @MainActor
 @Observable
