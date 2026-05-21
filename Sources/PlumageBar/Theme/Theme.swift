@@ -28,6 +28,14 @@ extension View {
     @ViewBuilder
     func plumageGlass(cornerRadius: CGFloat = Theme.cardCornerRadius) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+        // The `.glassEffect` modifier ships with the macOS 26 SDK, which is
+        // bundled with Swift 6.3 / Xcode 26. Older toolchains (e.g. the
+        // GitHub Actions macos-latest runner today, which still ships with
+        // Xcode 16.x) can't even type-check the symbol, so `#available` alone
+        // isn't enough — we need a compile-time gate. `#if swift(>=6.3)` is
+        // a proxy for "macOS 26 SDK is available" because Apple ships Swift
+        // 6.3 only with Xcode 26.
+        #if swift(>=6.3)
         if #available(macOS 26.0, *) {
             self.glassEffect(.regular, in: .rect(cornerRadius: cornerRadius))
                 .overlay(shape.stroke(Color.primary.opacity(0.12), lineWidth: 0.5))
@@ -35,5 +43,9 @@ extension View {
             self.background(shape.fill(.thinMaterial))
                 .overlay(shape.stroke(Color.primary.opacity(0.12), lineWidth: 0.5))
         }
+        #else
+        self.background(shape.fill(.thinMaterial))
+            .overlay(shape.stroke(Color.primary.opacity(0.12), lineWidth: 0.5))
+        #endif
     }
 }
