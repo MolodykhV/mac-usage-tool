@@ -1,4 +1,18 @@
+import PlumageBarCore
 import SwiftUI
+
+extension ThresholdState {
+    /// Color the value text adopts in popover cards and (when not in a
+    /// template render) the menu bar. `.primary` lets the UI use the system
+    /// label colour so dark/light mode just works.
+    var color: Color {
+        switch self {
+        case .normal: return .primary
+        case .warning: return .orange
+        case .exceeded: return .red
+        }
+    }
+}
 
 enum Theme {
     static let cardCornerRadius: CGFloat = 12

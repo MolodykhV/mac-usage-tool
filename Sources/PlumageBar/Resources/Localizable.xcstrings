@@ -1,0 +1,391 @@
+{
+  "sourceLanguage" : "en",
+  "version" : "1.0",
+  "strings" : {
+    "menu.settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings…" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Настройки…" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Réglages…" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes…" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Einstellungen…" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设置…" } }
+      }
+    },
+    "menu.quit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Quit Plumage Bar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выйти из Plumage Bar" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Quitter Plumage Bar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Salir de Plumage Bar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar beenden" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "退出 Plumage Bar" } }
+      }
+    },
+    "settings.window.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar Settings" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Настройки Plumage Bar" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Réglages de Plumage Bar" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes de Plumage Bar" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar – Einstellungen" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Plumage Bar 设置" } }
+      }
+    },
+    "settings.tab.general" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "General" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Основные" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Général" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "General" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Allgemein" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "通用" } }
+      }
+    },
+    "settings.tab.display" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Display" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отображение" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Affichage" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pantalla" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Anzeige" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "显示" } }
+      }
+    },
+    "settings.tab.thresholds" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Thresholds" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Пороги" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Seuils" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Umbrales" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Schwellenwerte" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阈值" } }
+      }
+    },
+    "settings.general.sampling" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sampling" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Опрос датчиков" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Échantillonnage" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Muestreo" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Abtastung" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "采样" } }
+      }
+    },
+    "settings.general.interval.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Update interval" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Интервал обновления" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Intervalle de mise à jour" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Intervalo de actualización" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Aktualisierungsintervall" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "更新间隔" } }
+      }
+    },
+    "settings.general.interval.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Refreshes every %.1f seconds." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Обновляется каждые %.1f с." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Actualisé toutes les %.1f s." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Se actualiza cada %.1f s." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Wird alle %.1f s aktualisiert." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "每 %.1f 秒更新一次。" } }
+      }
+    },
+    "settings.general.startup" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Startup" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Автозапуск" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Démarrage" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Inicio" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Start" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "启动" } }
+      }
+    },
+    "settings.general.autostart" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Launch at login" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Запускать при входе в систему" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Lancer à l’ouverture de session" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Iniciar al iniciar sesión" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Beim Anmelden starten" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "登录时启动" } }
+      }
+    },
+    "settings.display.visible" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Visible in menu bar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Видны в меню-баре" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Visibles dans la barre des menus" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Visibles en la barra de menús" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "In der Menüleiste anzeigen" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "在菜单栏中显示" } }
+      }
+    },
+    "settings.display.visible.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pick which metrics appear in the menu bar." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выберите, какие метрики показывать в меню-баре." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Choisissez les indicateurs affichés dans la barre des menus." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Elige qué métricas se muestran en la barra de menús." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Wähle aus, welche Werte in der Menüleiste erscheinen." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "选择要在菜单栏中显示的指标。" } }
+      }
+    },
+    "settings.display.format" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Format" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Формат" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Format" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Formato" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Format" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "格式" } }
+      }
+    },
+    "settings.display.ramFormat.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Memory display" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отображение памяти" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Affichage mémoire" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Visualización de memoria" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Speicheranzeige" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "内存显示" } }
+      }
+    },
+    "settings.display.ramFormat.percent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Percent" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Проценты" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Pourcentage" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Porcentaje" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Prozent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "百分比" } }
+      }
+    },
+    "settings.display.ramFormat.absolute" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Absolute" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Абсолютное" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Absolu" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Absoluto" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Absolut" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "绝对值" } }
+      }
+    },
+    "settings.thresholds.levels" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Levels" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уровни" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Niveaux" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Niveles" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Werte" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阈值" } }
+      }
+    },
+    "settings.thresholds.cpu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "ЦП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } }
+      }
+    },
+    "settings.thresholds.gpu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "ГП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } }
+      }
+    },
+    "settings.thresholds.ram" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Memory" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Память" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Mémoire" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Memoria" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Speicher" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "内存" } }
+      }
+    },
+    "settings.thresholds.note" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications fire when a metric stays above its threshold for the dwell time." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уведомление приходит, когда значение остаётся выше порога заданное время." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Une notification est déclenchée lorsqu’un indicateur reste au-dessus du seuil pendant la durée définie." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Se envía una notificación cuando una métrica supera el umbral durante el tiempo indicado." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Eine Benachrichtigung wird ausgelöst, wenn ein Wert über die festgelegte Zeit oberhalb der Schwelle bleibt." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当某项指标在指定时间内保持高于阈值时,将发送通知。" } }
+      }
+    },
+    "settings.thresholds.sustained" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dwell time" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Длительность" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Durée" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Duración" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Verweildauer" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "持续时间" } }
+      }
+    },
+    "settings.thresholds.sustained.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sustained above threshold" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удержание выше порога" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Maintenu au-dessus du seuil" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sostenido sobre el umbral" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Über Schwelle gehalten" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "高于阈值的持续时间" } }
+      }
+    },
+    "settings.thresholds.sustained.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Threshold must be exceeded for %.0f seconds." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Порог должен быть превышен %.0f с." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Le seuil doit être dépassé pendant %.0f s." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "El umbral debe superarse durante %.0f s." } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Schwelle muss %.0f s überschritten sein." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阈值需被超出 %.0f 秒。" } }
+      }
+    },
+    "metric.cpu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "ЦП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } }
+      }
+    },
+    "metric.gpu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "ГП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } }
+      }
+    },
+    "metric.ram" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Memory" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Память" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Mémoire" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Memoria" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Speicher" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "内存" } }
+      }
+    },
+    "popover.section.topCPU" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Top CPU" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Топ по ЦП" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "CPU principaux" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mayor uso de CPU" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Top CPU" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "CPU 占用最高" } }
+      }
+    },
+    "popover.section.topMemory" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Top Memory" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Топ по памяти" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Mémoire principale" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mayor uso de memoria" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Top Speicher" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "内存占用最高" } }
+      }
+    },
+    "autostart.status.enabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enabled" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Включено" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Activé" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Activado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Aktiviert" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已启用" } }
+      }
+    },
+    "autostart.status.notRegistered" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not registered" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Не зарегистрировано" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Non enregistré" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No registrado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Nicht registriert" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未注册" } }
+      }
+    },
+    "autostart.status.requiresApproval" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Requires approval in System Settings" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Требуется подтверждение в Системных настройках" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Approbation requise dans les Réglages Système" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Requiere aprobación en Ajustes del Sistema" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Genehmigung in Systemeinstellungen erforderlich" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "需要在系统设置中授权" } }
+      }
+    },
+    "autostart.status.notFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not found" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Не найдено" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Introuvable" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No encontrado" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Nicht gefunden" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未找到" } }
+      }
+    },
+    "autostart.status.unknown" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unknown" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Неизвестно" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Inconnu" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Desconocido" } },
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Unbekannt" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未知" } }
+      }
+    }
+  }
+}

@@ -27,6 +27,21 @@ cp "$BIN_PATH/$APP_NAME" "$APP_DIR/Contents/MacOS/$APP_NAME"
 cp "$ROOT/Resources/Info.plist" "$APP_DIR/Contents/Info.plist"
 printf 'APPL????' > "$APP_DIR/Contents/PkgInfo"
 
+# Compile the String Catalog into per-locale .strings/.stringsdict files and
+# drop them directly into the .app's Resources/<lang>.lproj/ structure so
+# Bundle.main lookups work without any SwiftPM bundle plumbing.
+XCSTRINGS="$ROOT/Sources/PlumageBar/Resources/Localizable.xcstrings"
+if [[ -f "$XCSTRINGS" ]]; then
+    if xcrun --find xcstringstool >/dev/null 2>&1; then
+        xcrun xcstringstool compile "$XCSTRINGS" \
+            -o "$APP_DIR/Contents/Resources" >/dev/null
+    else
+        echo "warning: xcstringstool not found (needs Xcode 15+); skipping" >&2
+        echo "         localization compilation. The .app will fall back to" >&2
+        echo "         English-only strings." >&2
+    fi
+fi
+
 # Ad-hoc sign so the bundle is launchable from Finder. Hardened runtime is
 # intentionally NOT enabled here: with ad-hoc identity, --options runtime can
 # block dyld from loading private frameworks like IOReport (used by GPU module

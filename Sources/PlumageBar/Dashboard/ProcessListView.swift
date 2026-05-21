@@ -7,12 +7,12 @@ struct ProcessListView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             section(
-                title: "Top CPU",
+                title: "popover.section.topCPU",
                 processes: report?.topByCPU ?? [],
                 trailing: { String(format: "%.0f%%", $0.cpuPercent) }
             )
             section(
-                title: "Top Memory",
+                title: "popover.section.topMemory",
                 processes: report?.topByMemory ?? [],
                 trailing: { Self.formatBytes($0.residentBytes) }
             )
@@ -25,7 +25,7 @@ struct ProcessListView: View {
 
     @ViewBuilder
     private func section(
-        title: String,
+        title: LocalizedStringKey,
         processes: [ProcessUsage],
         trailing: @escaping (ProcessUsage) -> String
     ) -> some View {

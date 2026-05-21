@@ -10,14 +10,22 @@ final class StatusItemController: NSObject {
         subsystem: "com.molodykh.PlumageBar", category: "menubar")
 
     private let viewModel: DashboardViewModel
+    private let settingsStore: SettingsStore
+    private let onOpenSettings: () -> Void
     private var statusItem: NSStatusItem?
     private var panelController: PopoverPanelController<PopoverView>?
     private var rightClickMenu: NSMenu?
-    private let displayMetrics: [MenuBarMetric] = MenuBarMetric.allCases
+    private var appearanceObservation: NSKeyValueObservation?
     private static let iconHeight: CGFloat = 22
 
-    init(viewModel: DashboardViewModel) {
+    init(
+        viewModel: DashboardViewModel,
+        settingsStore: SettingsStore,
+        onOpenSettings: @escaping () -> Void
+    ) {
         self.viewModel = viewModel
+        self.settingsStore = settingsStore
+        self.onOpenSettings = onOpenSettings
     }
 
     func install() {
@@ -32,16 +40,31 @@ final class StatusItemController: NSObject {
         }
 
         let menu = NSMenu()
+        let settingsItem = NSMenuItem(
+            title: NSLocalizedString("menu.settings", comment: ""),
+            action: #selector(openSettings(_:)),
+            keyEquivalent: ","
+        )
+        settingsItem.target = self
+        menu.addItem(settingsItem)
+        menu.addItem(.separator())
         menu.addItem(
             NSMenuItem(
-                title: "Quit Plumage Bar",
+                title: NSLocalizedString("menu.quit", comment: ""),
                 action: #selector(NSApplication.terminate(_:)),
                 keyEquivalent: "q"
             ))
 
         let panel = PopoverPanelController(
-            rootView: PopoverView(viewModel: viewModel),
-            size: NSSize(width: Theme.popoverWidth + 16, height: 400)
+            rootView: PopoverView(
+                viewModel: viewModel,
+                settingsStore: settingsStore,
+                onOpenSettings: { [weak self] in
+                    self?.panelController?.close()
+                    self?.onOpenSettings()
+                }
+            ),
+            size: NSSize(width: Theme.popoverWidth + 16, height: 420)
         )
 
         self.statusItem = item
@@ -49,7 +72,9 @@ final class StatusItemController: NSObject {
         self.rightClickMenu = menu
 
         renderIconImage()
-        observeViewModel()
+        observeSnapshot()
+        observeSettings()
+        observeAppearance()
 
         Self.log.info("Status item installed")
     }
@@ -59,51 +84,95 @@ final class StatusItemController: NSObject {
         if let statusItem {
             NSStatusBar.system.removeStatusItem(statusItem)
         }
+        appearanceObservation?.invalidate()
+        appearanceObservation = nil
         statusItem = nil
         panelController = nil
         rightClickMenu = nil
     }
 
     /// Render the SwiftUI menu-bar view into an `NSImage` and assign it to the
-    /// status item's button. Using a template image lets AppKit handle the
-    /// system menu-bar padding, dark/light tinting, and click hit-testing
-    /// without us fighting auto-layout inside `NSStatusBarButton`.
+    /// status item's button.
+    ///
+    /// When all metrics are below their warning bands the rendered image is
+    /// a clean template that AppKit tints with the menu-bar foreground colour.
+    /// As soon as any metric reaches warning or exceeded state we switch the
+    /// image off `isTemplate` so the orange/red colour survives — and render
+    /// the rest of the icon using the system's current `effectiveAppearance`
+    /// so the surrounding icons and digits still match dark/light mode.
     private func renderIconImage() {
+        let menuBarSettings = settingsStore.settings.menuBar
+        let thresholds = settingsStore.settings.thresholds
+        let snapshot = viewModel.latest
+        let usesAccentColour = menuBarSettings.visibleMetrics.contains { metric in
+            let value = metric.value(in: snapshot)
+            let threshold: Double
+            switch metric {
+            case .cpu: threshold = thresholds.cpuPercent
+            case .gpu: threshold = thresholds.gpuPercent
+            case .ram: threshold = thresholds.ramPercent
+            }
+            return ThresholdState(value: value, threshold: threshold) != .normal
+        }
+        let scheme = currentColorScheme()
         let view = MenuBarIconView(
-            snapshot: viewModel.latest,
-            metrics: displayMetrics,
-            renderForTemplate: true
+            snapshot: snapshot,
+            metrics: menuBarSettings.visibleMetrics,
+            ramFormat: menuBarSettings.ramFormat,
+            thresholds: thresholds
         )
+        .environment(\.colorScheme, scheme)
         .frame(height: Self.iconHeight)
 
         let renderer = ImageRenderer(content: view)
-        // Use the screen the menu-bar button actually lives on. For LSUIElement
-        // apps, `NSScreen.main` is whichever screen owns the focused app, which
-        // can differ from the screen containing the status item on multi-display
-        // setups — and that would produce wrong scale (blurry icons).
         renderer.scale =
             statusItem?.button?.window?.screen?.backingScaleFactor
             ?? NSScreen.main?.backingScaleFactor ?? 2
 
         guard let image = renderer.nsImage else { return }
-        image.isTemplate = true
+        image.isTemplate = !usesAccentColour
         statusItem?.button?.image = image
     }
 
-    // The menu bar icon is an NSImage produced by ImageRenderer, which is not
-    // hooked into SwiftUI's body-evaluation cycle. We drive refreshes
-    // manually: each onChange re-arms the observer first (so we never miss a
-    // tick during the render call), then re-renders. The outer `[weak self]`
-    // suffices — the inner Task closure is owned by the outer captured self.
-    private func observeViewModel() {
+    private func currentColorScheme() -> ColorScheme {
+        let appearance = statusItem?.button?.window?.effectiveAppearance ?? NSApp.effectiveAppearance
+        let match = appearance.bestMatch(from: [.darkAqua, .vibrantDark, .aqua, .vibrantLight])
+        switch match {
+        case .darkAqua, .vibrantDark: return .dark
+        default: return .light
+        }
+    }
+
+    private func observeSnapshot() {
         withObservationTracking {
             _ = viewModel.latest
         } onChange: { [weak self] in
             Task { @MainActor in
                 guard let self else { return }
-                self.observeViewModel()
+                self.observeSnapshot()
                 self.renderIconImage()
             }
+        }
+    }
+
+    private func observeSettings() {
+        withObservationTracking {
+            _ = settingsStore.settings.menuBar
+            _ = settingsStore.settings.thresholds
+        } onChange: { [weak self] in
+            Task { @MainActor in
+                guard let self else { return }
+                self.observeSettings()
+                self.renderIconImage()
+            }
+        }
+    }
+
+    private func observeAppearance() {
+        appearanceObservation?.invalidate()
+        appearanceObservation = NSApp.observe(\.effectiveAppearance, options: [.new]) {
+            [weak self] _, _ in
+            Task { @MainActor in self?.renderIconImage() }
         }
     }
 
@@ -119,6 +188,11 @@ final class StatusItemController: NSObject {
         default:
             panelController?.toggle(relativeTo: sender)
         }
+    }
+
+    @objc
+    private func openSettings(_ sender: Any?) {
+        onOpenSettings()
     }
 
     private func showContextMenu(relativeTo button: NSStatusBarButton, with event: NSEvent) {

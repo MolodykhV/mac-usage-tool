@@ -1,11 +1,12 @@
 import SwiftUI
 
 struct MetricCard: View {
-    let title: String
+    let title: LocalizedStringKey
     let systemImage: String
     let valueText: String
     var subtitle: String? = nil
     let series: [Double]
+    var valueColor: Color = .primary
 
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
@@ -22,7 +23,6 @@ struct MetricCard: View {
                         .font(Theme.cardTitleFont)
                         .foregroundStyle(.secondary)
                         .textCase(.uppercase)
-                        .accessibilityLabel(title)
                     Spacer()
                     HStack(alignment: .firstTextBaseline, spacing: 6) {
                         if let subtitle {
@@ -34,7 +34,7 @@ struct MetricCard: View {
                         Text(valueText)
                             .font(Theme.cardValueFont)
                             .monospacedDigit()
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(valueColor)
                     }
                 }
                 Sparkline(values: series)

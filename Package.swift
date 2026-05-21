@@ -21,6 +21,13 @@ let package = Package(
             name: "PlumageBar",
             dependencies: ["PlumageBarCore"],
             path: "Sources/PlumageBar",
+            resources: [
+                // String Catalog: SwiftPM compiles each locale entry into a
+                // separate .strings/.stringsdict pair inside the target's
+                // resource bundle. scripts/make-app.sh extracts the bundle's
+                // .lproj folders into the .app's Contents/Resources.
+                .process("Resources/Localizable.xcstrings")
+            ],
             swiftSettings: coreSwiftSettings
         ),
         // The IOReport SPI is exposed as `/usr/lib/libIOReport.dylib` on macOS
