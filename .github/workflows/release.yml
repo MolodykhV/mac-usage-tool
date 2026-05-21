@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build, package, publish
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          sw_vers
+          swift --version
+
+      - name: Build release
+        run: swift build -c release --arch arm64
+
+      - name: Assemble .app bundle
+        run: make app
+
+      # Real Developer ID signing + notarization will go here once a Dev ID is
+      # available. Required secrets (placeholder names):
+      #   DEVELOPER_ID_CERT_P12       — base64-encoded .p12
+      #   DEVELOPER_ID_CERT_PASSWORD  — password for the .p12
+      #   NOTARIZE_APPLE_ID           — Apple ID for notarytool
+      #   NOTARIZE_TEAM_ID            — Team ID for notarytool
+      #   NOTARIZE_APP_PASSWORD       — app-specific password
+      #
+      # GitHub Actions doesn't allow `secrets.*` directly in step `if:`, so we
+      # mirror the secret into a step output first and gate on that.
+      - name: Detect signing secrets
+        id: detect-signing
+        env:
+          HAS_CERT: ${{ secrets.DEVELOPER_ID_CERT_P12 != '' }}
+        run: echo "has_cert=$HAS_CERT" >> "$GITHUB_OUTPUT"
+
+      - name: Sign & notarize (no-op until Dev ID is configured)
+        if: steps.detect-signing.outputs.has_cert == 'true'
+        run: |
+          echo "TODO: real signing/notarization. Implement when Dev ID secrets exist."
+
+      - name: Create DMG
+        run: |
+          mkdir -p dist
+          hdiutil create -volname "Plumage Bar" \
+            -srcfolder dist/PlumageBar.app \
+            -ov -format UDZO \
+            "dist/PlumageBar-${GITHUB_REF_NAME}.dmg"
+          ls -lah dist/
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/PlumageBar-*.dmg
+          draft: true
+          generate_release_notes: true

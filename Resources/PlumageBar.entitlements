@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	    App Sandbox is intentionally disabled: Plumage Bar reads system-wide
+	    CPU/RAM via Mach APIs and GPU via the private IOReport SPI. A sandboxed
+	    process cannot access either. This is why the app is distributed via
+	    GitHub Releases, not the Mac App Store.
+	-->
+	<key>com.apple.security.app-sandbox</key>
+	<false/>
+</dict>
+</plist>

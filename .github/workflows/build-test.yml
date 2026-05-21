@@ -1,0 +1,45 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: swift build + swift test
+    # macOS 26 / Apple Silicon. GitHub Actions runner labels lag the OS by a few
+    # weeks — if `macos-latest` doesn't yet provide macOS 26, this needs to be
+    # pinned to `macos-26` (or back to `macos-15` temporarily while accepting
+    # that the build will fail until macOS 26 runners are GA).
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          sw_vers
+          swift --version
+          xcodebuild -version
+
+      - name: swift build
+        run: swift build -c release --arch arm64
+
+      - name: Assemble .app bundle
+        run: make app
+
+      - name: Show bundle layout
+        run: |
+          ls -lah dist/
+          ls -lah dist/PlumageBar.app/Contents/
+          codesign -dvv dist/PlumageBar.app 2>&1 || true
+
+      - name: swift test
+        run: swift test --parallel
