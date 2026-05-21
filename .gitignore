@@ -33,6 +33,11 @@ Package.pinned
 dist/
 notarization-receipt.*
 
+# App icon build artefacts — regenerated from Resources/AppIcon.png on every
+# make-app run via scripts/build-icon.sh.
+*.icns
+*.iconset/
+
 # Code signing / secrets — must never be in repo
 *.p12
 *.cer
