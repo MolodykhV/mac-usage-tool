@@ -1,0 +1,61 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdatad/
+xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcarchive
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.pinned
+
+# Generated app bundle / installers (built locally or by CI, never committed)
+*.app
+*.dmg
+*.pkg
+dist/
+notarization-receipt.*
+
+# Code signing / secrets — must never be in repo
+*.p12
+*.cer
+*.mobileprovision
+*.provisionprofile
+*.keychain
+*.keychain-db
+
+# Claude Code artifacts (per project requirement)
+.claude/
+.claude.json
+CLAUDE.local.md
+.serena/
+.aider*
+CLAUDE.md
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local environment
+.env
+.env.local
