@@ -6,19 +6,30 @@ public actor LiveMetricsProvider: MetricsProvider {
     private nonisolated let continuation: AsyncStream<Snapshot>.Continuation
 
     private let interval: Duration
+    // Process scanning is the most expensive part of a tick (proc_listallpids +
+    // proc_pidinfo per PID). Run it every Nth tick to keep the steady-state CPU
+    // budget low; 2 → twice the sample interval is responsive enough for a
+    // top-3 dashboard while halving the iteration cost.
+    private let processSamplingStride: Int
+    private var tickCounter: Int = 0
+
     private let cpu: CPUReader
     private let ram: RAMReader
     private let gpu: GPUReader
+    private let processes: ProcessReader
     private var samplingTask: Task<Void, Never>?
     private var gpuDisabled = false
+    private var lastProcessReport: ProcessReport?
 
     private static let log = Logger(subsystem: "com.molodykh.PlumageBar", category: "sampler")
 
-    public init(interval: Duration = .seconds(1)) {
+    public init(interval: Duration = .seconds(1), processSamplingStride: Int = 2) {
         self.interval = interval
+        self.processSamplingStride = max(1, processSamplingStride)
         self.cpu = CPUReader()
         self.ram = RAMReader()
         self.gpu = GPUReader()
+        self.processes = ProcessReader()
         let (stream, continuation) = AsyncStream<Snapshot>.makeStream(
             bufferingPolicy: .bufferingNewest(8)
         )
@@ -88,7 +99,24 @@ public actor LiveMetricsProvider: MetricsProvider {
             }
         }
 
-        let snap = Snapshot(timestamp: Date(), cpu: cpuUsage, ram: ramUsage, gpu: gpuUsage)
+        if tickCounter % processSamplingStride == 0 {
+            do {
+                lastProcessReport = try processes.read(topN: 3)
+            } catch {
+                Self.log.error(
+                    "Process read failed: \(String(describing: error), privacy: .public)")
+                lastProcessReport = nil
+            }
+        }
+        tickCounter &+= 1
+
+        let snap = Snapshot(
+            timestamp: Date(),
+            cpu: cpuUsage,
+            ram: ramUsage,
+            gpu: gpuUsage,
+            processes: lastProcessReport
+        )
         continuation.yield(snap)
     }
 

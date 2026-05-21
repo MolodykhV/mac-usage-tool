@@ -5,12 +5,20 @@ public struct Snapshot: Sendable, Codable, Equatable {
     public let cpu: CPUUsage
     public let ram: RAMUsage
     public let gpu: GPUUsage?
+    public let processes: ProcessReport?
 
-    public init(timestamp: Date, cpu: CPUUsage, ram: RAMUsage, gpu: GPUUsage?) {
+    public init(
+        timestamp: Date,
+        cpu: CPUUsage,
+        ram: RAMUsage,
+        gpu: GPUUsage?,
+        processes: ProcessReport? = nil
+    ) {
         self.timestamp = timestamp
         self.cpu = cpu
         self.ram = ram
         self.gpu = gpu
+        self.processes = processes
     }
 }
 
