@@ -5,38 +5,29 @@ import PlumageBarCore
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-    private static let log = Logger(subsystem: "com.molodykh.PlumageBar", category: "app")
-    private var statusItem: NSStatusItem?
+    nonisolated private static let log = Logger(
+        subsystem: "com.molodykh.PlumageBar", category: "app")
+
+    private let viewModel = DashboardViewModel()
+    private lazy var statusItemController = StatusItemController(viewModel: viewModel)
+    private var metrics: (any MetricsProvider)?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         Self.log.info("PlumageBar \(PlumageBarCore.version, privacy: .public) starting up")
-        installStatusItem()
+
+        let provider = LiveMetricsProvider(interval: .seconds(1))
+        self.metrics = provider
+        viewModel.bind(to: provider)
+        statusItemController.install()
+
+        Task.detached(priority: .utility) {
+            await provider.start()
+        }
     }
 
     func applicationWillTerminate(_ notification: Notification) {
         Self.log.info("PlumageBar terminating")
-    }
-
-    private func installStatusItem() {
-        let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-
-        if let button = item.button {
-            button.image = NSImage(
-                systemSymbolName: "gauge.with.dots.needle.50percent",
-                accessibilityDescription: "Plumage Bar"
-            )
-            button.imagePosition = .imageOnly
-        }
-
-        let menu = NSMenu()
-        menu.addItem(
-            NSMenuItem(
-                title: "Quit Plumage Bar",
-                action: #selector(NSApplication.terminate(_:)),
-                keyEquivalent: "q"
-            ))
-        item.menu = menu
-
-        self.statusItem = item
+        // Process tear-down releases the CFTypeRef-backed IOReport subscription
+        // and the sampling task cleanly; nothing async is needed here.
     }
 }
