@@ -27,6 +27,10 @@ cp "$BIN_PATH/$APP_NAME" "$APP_DIR/Contents/MacOS/$APP_NAME"
 cp "$ROOT/Resources/Info.plist" "$APP_DIR/Contents/Info.plist"
 printf 'APPL????' > "$APP_DIR/Contents/PkgInfo"
 
+# Compile the app icon from the source PNG. Generated .icns is never checked
+# in — every macOS toolchain has sips + iconutil so this is hermetic.
+"$ROOT/scripts/build-icon.sh" "$APP_DIR/Contents/Resources/AppIcon.icns"
+
 # Compile the String Catalog into per-locale .strings/.stringsdict files and
 # drop them directly into the .app's Resources/<lang>.lproj/ structure so
 # Bundle.main lookups work without any SwiftPM bundle plumbing.

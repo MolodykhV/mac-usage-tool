@@ -3,7 +3,6 @@ import Foundation
 import OSLog
 import Observation
 import PlumageBarCore
-
 // macOS 26 SDK marks UNNotificationSettings as Sendable; older toolchains
 // (e.g. the GitHub Actions macos-latest runner pinned to Xcode 16.x) don't.
 // @preconcurrency downgrades the resulting Sendable-violation errors to

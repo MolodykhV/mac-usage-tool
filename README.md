@@ -1,10 +1,12 @@
+<p align="center">
+  <img src="Resources/AppIcon.png" width="160" alt="Plumage Bar icon" />
+</p>
+
 # Plumage Bar
 
 > A lightweight CPU / GPU / RAM monitor for the macOS Tahoe menu bar, with Liquid Glass design.
 >
 > Лёгкий монитор CPU / GPU / RAM в меню-баре macOS Tahoe c дизайном Liquid Glass.
-
-**Status: early development (Stage 1 — scaffolding).**
 
 ## Highlights
 
@@ -12,7 +14,8 @@
 - Zero third-party runtime dependencies — only Apple system frameworks.
 - Apple Silicon (arm64) only. Requires **macOS 26 Tahoe** or later (Liquid Glass).
 - Tiny footprint: target budget is **≤ 30 MB RSS** and **< 0.5% CPU** when idle.
-- English and Russian out of the box; new languages are a one-PR change.
+- Six languages out of the box (EN, RU, FR, ES, DE, zh-Hans); new languages are a one-PR change.
+- Per-metric threshold notifications with episode-based dedup.
 
 ## Why another menu-bar monitor?
 
