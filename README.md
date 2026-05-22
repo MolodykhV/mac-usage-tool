@@ -12,9 +12,16 @@
   Calm, minimal, Liquid Glass — sits where you already look, nowhere else.
 </p>
 
-[![Download for macOS](https://img.shields.io/badge/Download-macOS%2026%2B-1f7aff?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/MolodykhV/mac-usage-tool/releases/latest)
-![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-arm64-555555?style=for-the-badge)
-![MIT](https://img.shields.io/badge/License-MIT-2ea44f?style=for-the-badge)
+<p align="center">
+  <a href="https://github.com/MolodykhV/mac-usage-tool/releases/latest">
+    <img alt="Download for macOS"
+         src="https://img.shields.io/badge/Download-macOS%2026%2B-1f7aff?style=for-the-badge&logo=apple" />
+  </a>
+  <img alt="Apple Silicon"
+       src="https://img.shields.io/badge/Apple%20Silicon-arm64-555555?style=for-the-badge" />
+  <img alt="MIT"
+       src="https://img.shields.io/badge/License-MIT-2ea44f?style=for-the-badge" />
+</p>
 
 ---
 
