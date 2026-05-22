@@ -23,7 +23,7 @@ struct DashboardViewModelTests {
         #expect(vm.history.cpuTotalSeries() == [10, 20, 30])
         #expect(vm.latest?.cpu.totalPercent == 30)
 
-        vm.unbind()
+        await vm.unbind()
         provider.finish()
     }
 
@@ -38,7 +38,7 @@ struct DashboardViewModelTests {
         try await waitForCondition(timeoutSeconds: 1) {
             vm.history.count >= 1
         }
-        vm.unbind()
+        await vm.unbind()
 
         provider.yield(snap(at: 1, cpu: 50))
         try? await Task.sleep(for: .milliseconds(150))
