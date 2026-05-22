@@ -4,7 +4,7 @@
     "line_length": 120
   },
   "MD033": {
-    "allowed_elements": ["p", "img"]
+    "allowed_elements": ["p", "img", "a"]
   },
   "MD041": false
 }
