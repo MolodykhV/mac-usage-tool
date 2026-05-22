@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MolodykhV/mac-usage-tool/releases/latest">
+  <a href="https://github.com/MolodykhV/plumage-bar/releases/latest">
     <img alt="Download for macOS"
          src="https://img.shields.io/badge/Download-macOS%2026%2B-1f7aff?style=for-the-badge&logo=apple" />
   </a>
@@ -49,7 +49,7 @@ numbers you actually care about, dressed up in macOS Tahoe's Liquid Glass.
 ## Install
 
 1. Grab the latest **`PlumageBar.dmg`** from
-   [Releases](https://github.com/MolodykhV/mac-usage-tool/releases/latest).
+   [Releases](https://github.com/MolodykhV/plumage-bar/releases/latest).
 2. Open the DMG, drag **Plumage Bar** to **Applications**.
 3. On first launch, right-click the app → **Open** to bypass the unsigned-app
    warning (no Developer ID yet; signing + notarization land alongside the
