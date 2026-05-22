@@ -59,7 +59,12 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          name: Plumage Bar ${{ github.ref_name }}
           files: |
             dist/PlumageBar-*.dmg
           draft: true
+          # Every tag starting with `v0.` is treated as a pre-release until
+          # we cut a stable v1.0.0. The maintainer flips this flag in the
+          # GitHub UI when publishing if a tag was meant as a stable cut.
+          prerelease: true
           generate_release_notes: true
